@@ -8,7 +8,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class HotelReservationService {
+public class HotelReservationService<Weekend, Weekday> {
 	private List<Hotel> hotels;
 	private static final DateTimeFormatter DATE_RANGE_FORMAT = DateTimeFormatter.ofPattern("ddMMMyyyy");
 
@@ -83,6 +83,5 @@ public class HotelReservationService {
 			else
 				return ridgewood.rate.get(CustomerType.REGULAR).getWeekdayRates();
 		}
-
 
 }

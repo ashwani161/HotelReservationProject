@@ -54,6 +54,7 @@ public class HotelReservationTest {
 	public void givenWeekdayAndWeekend_whenCostForEach_shouldBeAddedToWeekdayAndWeekend() {
 		Assert.assertEquals(220, this.hotelReservationService.cost(ridgewood));
 
-		// Assert.assertTrue(this.hotelReservationService.addweekend(lakewood));
 	}
+
+	
 }
