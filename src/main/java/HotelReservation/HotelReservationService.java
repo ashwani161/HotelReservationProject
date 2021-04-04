@@ -3,10 +3,14 @@ package HotelReservation;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import org.junit.internal.runners.statements.Fail;
+import org.junit.runner.notification.Failure;
 
 public class HotelReservationService<Weekend, Weekday> {
 	private List<Hotel> hotels;
@@ -27,6 +31,7 @@ public class HotelReservationService<Weekend, Weekday> {
 
 		List<Result> results = this.hotels.stream().map(hotel -> {
 			Result result = new Result();
+			
 			result.setHotelName(hotel.name);
 			result.setTotalRate(hotel.getTotalRate(customerType, initialDate, endDate));
 			return result;
@@ -79,16 +84,16 @@ public class HotelReservationService<Weekend, Weekday> {
 	public int costRegular(Hotel hotel) {
 		LocalDate todayDate = LocalDate.now();
 		if (todayDate.getDayOfWeek().equals(DayOfWeek.SATURDAY) || todayDate.getDayOfWeek().equals(DayOfWeek.SUNDAY))
-			return Hotel.rate.get(CustomerType.REGULAR).getWeekendRates();
+			return hotel.rate.get(CustomerType.REGULAR).getWeekendRates();
 		else
-			return Hotel.rate.get(CustomerType.REGULAR).getWeekdayRates();
+			return hotel.rate.get(CustomerType.REGULAR).getWeekdayRates();
 	}
 
 	public List<Result> findCheapestBestRatedHotelforGivenDateRange(CustomerType customerType, String initialDateRange,
-			String endDateRange) {
+			String endDateRange) throws Exception {
+		try {
 		LocalDate initialDate = LocalDate.parse(initialDateRange, DATE_RANGE_FORMAT);
 		LocalDate endDate = LocalDate.parse(endDateRange, DATE_RANGE_FORMAT);
-
 		List<Result> results = this.hotels.stream().map(hotel -> {
 			Result result = new Result();
 			result.setHotelName(hotel.name);
@@ -98,6 +103,10 @@ public class HotelReservationService<Weekend, Weekday> {
 		}).sorted(Comparator.comparing(Result::getTotalRate)
 				.thenComparing(Comparator.comparing(Result::getRating).reversed())).collect(Collectors.toList());
 		return results;
+		}catch(DateTimeParseException e) {
+			throw new Exception("Please provide valid dates");
+		}
+		
 
 	}
 	
@@ -121,9 +130,9 @@ public class HotelReservationService<Weekend, Weekday> {
 	public int costReward(Hotel hotel) {
 		LocalDate todayDate = LocalDate.now();
 		if (todayDate.getDayOfWeek().equals(DayOfWeek.SATURDAY) || todayDate.getDayOfWeek().equals(DayOfWeek.SUNDAY))
-			return Hotel.rate.get(CustomerType.REWARD).getWeekendRates();
+			return hotel.rate.get(CustomerType.REWARD).getWeekendRates();
 		else
-			return Hotel.rate.get(CustomerType.REWARD).getWeekdayRates();
+			return hotel.rate.get(CustomerType.REWARD).getWeekdayRates();
 	}
 	
 }
