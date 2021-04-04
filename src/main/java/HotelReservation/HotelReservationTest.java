@@ -80,9 +80,10 @@ public class HotelReservationTest {
 		Assert.assertEquals("Ridgewood", BestRatedHotelResult.get(0).getHotelName());
 		Assert.assertEquals(370, BestRatedHotelResult.get(0).getTotalRate());
 	}
-	@Test
-	public void givenWeekdayAndWeekend_whenCostForEach_shouldBeAddedToWeekdayAndWeekend() {
-		Assert.assertEquals(100, this.hotelReservationService.costReward(ridgewood));
+
+@Test
+	public void givenWeekdayAndWeekend_whenCostRewardForEach_shouldBeAddedToWeekdayAndWeekend() throws Exception {
+		Assert.assertEquals(110, this.hotelReservationService.costReward(bridgewood,"04Apr2021"));
 
 	}
 	@Test
