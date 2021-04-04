@@ -81,12 +81,18 @@ public class HotelReservationService<Weekend, Weekday> {
 		return dayName;
 	}
 
-	public int costRegular(Hotel hotel) {
-		LocalDate todayDate = LocalDate.now();
-		if (todayDate.getDayOfWeek().equals(DayOfWeek.SATURDAY) || todayDate.getDayOfWeek().equals(DayOfWeek.SUNDAY))
-			return hotel.rate.get(CustomerType.REGULAR).getWeekendRates();
-		else
-			return hotel.rate.get(CustomerType.REGULAR).getWeekdayRates();
+	public int costRegular(Hotel hotel, String date) throws Exception {
+		try {
+			LocalDate todayDate = LocalDate.parse(date, DATE_RANGE_FORMAT);
+			if (todayDate.getDayOfWeek().equals(DayOfWeek.SATURDAY)
+					|| todayDate.getDayOfWeek().equals(DayOfWeek.SUNDAY))
+				return hotel.rate.get(CustomerType.REGULAR).getWeekendRates();
+			else
+				return hotel.rate.get(CustomerType.REGULAR).getWeekdayRates();
+		} catch (DateTimeParseException e) {
+			throw new Exception("Please provide valid dates");
+		}
+
 	}
 
 	public List<Result> findCheapestBestRatedHotelforGivenDateRange(CustomerType customerType, String initialDateRange,

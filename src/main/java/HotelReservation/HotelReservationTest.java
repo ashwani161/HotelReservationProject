@@ -51,8 +51,8 @@ public class HotelReservationTest {
 	}
 
 	@Test
-	public void givenWeekdayAndWeekend_whenCost1ForEach_shouldBeAddedToWeekdayAndWeekend() {
-		Assert.assertEquals(160, this.hotelReservationService.costRegular(bridgewood));
+	public void givenWeekdayAndWeekend_whenCostForEach_shouldBeAddedToWeekdayAndWeekend() throws Exception {
+		Assert.assertEquals(220, this.hotelReservationService.costRegular(ridgewood,"04Apr2021"));
 
 	}
 	
