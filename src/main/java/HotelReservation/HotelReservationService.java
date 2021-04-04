@@ -76,28 +76,12 @@ public class HotelReservationService<Weekend, Weekday> {
 		return dayName;
 	}
 
-	public int cost(Hotel lakewood) {
+	public int costRegular(Hotel hotel) {
 		LocalDate todayDate = LocalDate.now();
 		if (todayDate.getDayOfWeek().equals(DayOfWeek.SATURDAY) || todayDate.getDayOfWeek().equals(DayOfWeek.SUNDAY))
-			return lakewood.rate.get(CustomerType.REGULAR).getWeekendRates();
+			return Hotel.rate.get(CustomerType.REGULAR).getWeekendRates();
 		else
-			return lakewood.rate.get(CustomerType.REGULAR).getWeekdayRates();
-	}
-
-	public int cost1(Hotel bridgewood) {
-		LocalDate todayDate = LocalDate.now();
-		if (todayDate.getDayOfWeek().equals(DayOfWeek.SATURDAY) || todayDate.getDayOfWeek().equals(DayOfWeek.SUNDAY))
-			return bridgewood.rate.get(CustomerType.REGULAR).getWeekendRates();
-		else
-			return bridgewood.rate.get(CustomerType.REGULAR).getWeekdayRates();
-	}
-
-	public int cost2(Hotel ridgewood) {
-		LocalDate todayDate = LocalDate.now();
-		if (todayDate.getDayOfWeek().equals(DayOfWeek.SATURDAY) || todayDate.getDayOfWeek().equals(DayOfWeek.SUNDAY))
-			return ridgewood.rate.get(CustomerType.REGULAR).getWeekendRates();
-		else
-			return ridgewood.rate.get(CustomerType.REGULAR).getWeekdayRates();
+			return Hotel.rate.get(CustomerType.REGULAR).getWeekdayRates();
 	}
 
 	public List<Result> findCheapestBestRatedHotelforGivenDateRange(CustomerType customerType, String initialDateRange,
@@ -133,4 +117,13 @@ public class HotelReservationService<Weekend, Weekday> {
 		return results;
 
 	}
+	
+	public int costReward(Hotel hotel) {
+		LocalDate todayDate = LocalDate.now();
+		if (todayDate.getDayOfWeek().equals(DayOfWeek.SATURDAY) || todayDate.getDayOfWeek().equals(DayOfWeek.SUNDAY))
+			return Hotel.rate.get(CustomerType.REWARD).getWeekendRates();
+		else
+			return Hotel.rate.get(CustomerType.REWARD).getWeekdayRates();
+	}
+	
 }

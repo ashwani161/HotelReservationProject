@@ -51,8 +51,8 @@ public class HotelReservationTest {
 	}
 
 	@Test
-	public void givenWeekdayAndWeekend_whenCostForEach_shouldBeAddedToWeekdayAndWeekend() {
-		Assert.assertEquals(220, this.hotelReservationService.cost(ridgewood));
+	public void givenWeekdayAndWeekend_whenCost1ForEach_shouldBeAddedToWeekdayAndWeekend() {
+		Assert.assertEquals(160, this.hotelReservationService.costRegular(bridgewood));
 
 	}
 	
@@ -79,6 +79,11 @@ public class HotelReservationTest {
 		Assert.assertEquals(5, BestRatedHotelResult.get(0).getRating());
 		Assert.assertEquals("Ridgewood", BestRatedHotelResult.get(0).getHotelName());
 		Assert.assertEquals(370, BestRatedHotelResult.get(0).getTotalRate());
+	}
+	@Test
+	public void givenWeekdayAndWeekend_whenCost5ForEach_shouldBeAddedToWeekdayAndWeekend() {
+		Assert.assertEquals(100, this.hotelReservationService.costReward(ridgewood));
+
 	}
 	
 }
