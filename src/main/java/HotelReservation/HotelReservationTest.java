@@ -68,6 +68,7 @@ public class HotelReservationTest {
 				"11Sep2020", "12Sep2020");
 
 		Assert.assertEquals(4, cheapestBestRatedHotelResult.get(0).getRating());
+		Assert.assertEquals("Bridgewood", cheapestBestRatedHotelResult.get(0).getHotelName());
 		Assert.assertEquals(200, cheapestBestRatedHotelResult.get(0).getTotalRate());
 	}
 	
@@ -91,9 +92,9 @@ public class HotelReservationTest {
 		List<Result> cheapestBestRatedHotelResult = hotelReservationService.findCheapestBestRatedHotelforGivenDateRange(CustomerType.REWARD,
 				"11Sep2020", "12Sep2020");
 
-		Assert.assertEquals(4, cheapestBestRatedHotelResult.get(1).getRating());
-		Assert.assertEquals("Bridgewood", cheapestBestRatedHotelResult.get(1).getHotelName());
-		Assert.assertEquals(160, cheapestBestRatedHotelResult.get(1).getTotalRate());
+		Assert.assertEquals(5, cheapestBestRatedHotelResult.get(0).getRating());
+		Assert.assertEquals("Ridgewood", cheapestBestRatedHotelResult.get(0).getHotelName());
+		Assert.assertEquals(140, cheapestBestRatedHotelResult.get(0).getTotalRate());
 	}
 	
 	
