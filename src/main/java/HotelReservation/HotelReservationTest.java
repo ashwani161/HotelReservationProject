@@ -55,6 +55,10 @@ public class HotelReservationTest {
 		Assert.assertEquals(220, this.hotelReservationService.cost(ridgewood));
 
 	}
-
+	
+	@Test
+	public void givenHotel_whenInvokedAddRating_shouldBeAbleToAdd() {
+		Assert.assertEquals(3,lakewood.getrating(3));
+	}
 	
 }

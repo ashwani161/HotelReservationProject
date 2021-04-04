@@ -14,6 +14,7 @@ public class Hotel {
 		this.name = name;
 		this.rating = rating;
 		this.rate = rate;
+		
 	}
 	
 	 public int getTotalRate(CustomerType customerType, LocalDate initialDate, LocalDate endDate) {
@@ -44,6 +45,9 @@ public class Hotel {
 //	public static void main(String[] args) {
 //		System.out.println("Welcome to Hotel Reservation Program");
 //	}
-
 	
+
+	public int getrating(int i) {
+		return 		this.rating;
+	}
 }
